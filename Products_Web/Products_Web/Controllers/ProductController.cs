@@ -23,6 +23,7 @@ namespace Products_Web.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public IActionResult Create(CreateProductViewModel product)
         {
@@ -30,10 +31,25 @@ namespace Products_Web.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-        [HttpDelete]
+
         public IActionResult Delete(int id)
         {
             productService.Delete(id);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var product = productService.Get(id);
+
+            return View(product);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(EditProductViewModel product)
+        {
+            productService.Edit(product);
 
             return RedirectToAction(nameof(Index));
         }

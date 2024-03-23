@@ -28,11 +28,18 @@
                 <th>@product.Stock</th>
                 <th>
                     <button>
+                        @*Product - ProductController; Edit - Edit Action in ProductController*@
                         <a 
-                            asp-page-handler="post"
                             asp-controller="Product"
-                            asp-action="Delete"
+                            asp-action="Edit"
                             asp-route-id="@product.Id">
+                            Edit
+                        </a>
+                    </button>
+                    <button>
+                        <a asp-controller="Product"
+                           asp-action="Delete"
+                           asp-route-id="@product.Id">
                             Delete
                         </a>
                     </button>

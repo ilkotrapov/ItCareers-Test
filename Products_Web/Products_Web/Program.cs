@@ -4,6 +4,7 @@ using Products_Web.Repositories;
 using Products_Web.Repositories.Interfaces;
 using Products_Web.Services;
 using Products_Web.Services.Interfaces;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,16 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationContext>( context => 
 context.UseMySQL(connectionString));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => 
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequiredUniqueChars = 1;
+    options.Password.RequiredLength = 4;
+})
+    .AddEntityFrameworkStores<ApplicationContext>();
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();

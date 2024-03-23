@@ -32,7 +32,23 @@ namespace Products_Web.Services
             return products;
         }
 
+        public ProductViewModel Get(int id)
+        {
+            var product = productRepository.Get(id);
+
+            return new ProductViewModel(product.Id, product.Name, product.Price, product.Stock);
+        }
+
+        public void Edit(EditProductViewModel product)
+        {
+            var productEntity = new Product(product.Id, product.Name, product.Price, product.Stock);
+
+            productRepository.Edit(productEntity);
+        }
+
         public void Delete(int id)
             => productRepository.Delete(id);
+
+       
     }
 }

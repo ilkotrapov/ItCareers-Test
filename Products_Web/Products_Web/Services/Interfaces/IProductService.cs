@@ -1,5 +1,5 @@
 ﻿using Products_Web.Data.Entities;
-using Products_Web.Models;
+using Products_Web.Models.Product;
 
 namespace Products_Web.Services.Interfaces
 {
@@ -7,9 +7,9 @@ namespace Products_Web.Services.Interfaces
     {
         void Add(CreateProductViewModel product);
 
-        //ToDo: Get all
+        IEnumerable<ProductViewModel> GetAll();
 
-        //ToDo: Create
+        void Delete(int id);
 
         //ToDo: Update
 

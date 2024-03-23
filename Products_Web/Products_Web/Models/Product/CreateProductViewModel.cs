@@ -1,4 +1,4 @@
-﻿namespace Products_Web.Models
+﻿namespace Products_Web.Models.Product
 {
     public class CreateProductViewModel
     {

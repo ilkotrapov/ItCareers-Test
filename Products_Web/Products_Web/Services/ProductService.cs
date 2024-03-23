@@ -1,5 +1,5 @@
 ﻿using Products_Web.Data.Entities;
-using Products_Web.Models;
+using Products_Web.Models.Product;
 using Products_Web.Repositories;
 using Products_Web.Repositories.Interfaces;
 using Products_Web.Services.Interfaces;
@@ -21,5 +21,18 @@ namespace Products_Web.Services
 
             productRepository.Add(productEntity);
         }
+
+        public IEnumerable<ProductViewModel> GetAll()
+        {
+            var productEntities = productRepository.GetAll();
+
+            var products = productEntities
+                .Select(product => new ProductViewModel(product.Id, product.Name, product.Price, product.Stock));
+
+            return products;
+        }
+
+        public void Delete(int id)
+            => productRepository.Delete(id);
     }
 }

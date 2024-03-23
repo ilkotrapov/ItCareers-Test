@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Products_Web.Models;
+using Products_Web.Models.Product;
 using Products_Web.Services.Interfaces;
 
 namespace Products_Web.Controllers
@@ -14,7 +14,9 @@ namespace Products_Web.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var products = productService.GetAll();
+            
+            return View(products);
         }
 
         public IActionResult Create()
@@ -25,6 +27,13 @@ namespace Products_Web.Controllers
         public IActionResult Create(CreateProductViewModel product)
         {
             productService.Add(product);
+
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            productService.Delete(id);
 
             return RedirectToAction(nameof(Index));
         }

@@ -17,5 +17,19 @@ namespace Products_Web.Repositories
             context.Products.Add(product);
             context.SaveChanges();
         }
+
+        public IEnumerable<Product> GetAll()
+            => context.Products.ToList();
+
+        public void Delete(int id) 
+        {
+            var product = Get(id);
+            //ToDo: add null value validation
+
+            context.Products.Remove(product);
+            context.SaveChanges();
+        }
+        private Product Get(int id)
+            => context.Products.FirstOrDefault(product => product.Id == id);
     }
 }

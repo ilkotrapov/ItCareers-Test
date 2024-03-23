@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using Products_Web.Data.Entities
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -28,6 +34,8 @@
                     </ul>
                 </div>
             </div>
+
+            <partial name="_LoginPartial" />@*Gets the code from LoginPartial and pastes it there*@
         </nav>
     </header>
     <div class="container">

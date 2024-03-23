@@ -5,6 +5,7 @@ using Products_Web.Repositories.Interfaces;
 using Products_Web.Services;
 using Products_Web.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Products_Web.Data.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +18,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationContext>( context => 
 context.UseMySQL(connectionString));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => 
+builder.Services.AddDefaultIdentity<User>(options => 
 {
     options.Password.RequireDigit = true;
     options.Password.RequireNonAlphanumeric = true;
@@ -46,11 +47,14 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();
 
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Product}/{action=Index}/{id?}");
+
+app.MapRazorPages();
 
 app.Run();

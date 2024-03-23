@@ -15,7 +15,7 @@ namespace Products_Web.Controllers
         public IActionResult Index()
         {
             var products = productService.GetAll();
-            
+
             return View(products);
         }
 
